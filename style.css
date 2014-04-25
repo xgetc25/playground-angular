@@ -1,0 +1,35 @@
+.grid {
+    border-collapse:collapse;
+    table-layout: fixed;
+    width: 800px;
+    height: 500px;
+}
+
+.grid-row {
+
+}
+.grid-header {
+    width: 100px;
+    font-size: 12px;
+    height: 10px;
+    overflow: hidden;
+}
+.grid-header-name {
+    width: 600px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.grid-cell {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.selectedItems{
+
+}
+.data-source {
+    padding: 10px 20px
+}
+.data-source input {
+    margin-left: 20px;
+}

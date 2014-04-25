@@ -1,0 +1,37 @@
+        <div class="data-source" >  Набор данных:
+              <label><input type="radio" ng-model="dataSize" value="small">  Маленкий</label>
+              <label><input type="radio" ng-model="dataSize" value="big"> Большой </label>
+              <label><input type="radio" ng-model="dataSize" value="custom"> Свой </label>
+        </div>
+        <table class="grid">
+                    <tr>
+                        <th ng-click="sortBy('id')">
+                            Идентификатор
+                        </th>
+                        <th ng-click="sortBy('name')">
+                            Название
+                        </th>
+                        <th ng-click="sortBy('price')">
+                            Стоимость
+                        </th>
+                        <th ng-click="sortBy('bid')">
+                            Ставка
+                        </th>
+                    </tr>
+                    <tr ng-repeat="row in data">
+                        <td>
+                            {{ row.id }}
+                        </td>
+                        <td>
+                            {{ row.name }}
+                        </td>
+                        <td>
+                            {{ row.price }}
+                        </td>
+                        <td>
+                            {{ row.bid }}
+                        </td>
+                    </tr>
+                </table>
+
+        <div class="selectedItem">Выбрано: {{selectedItem}}</div>

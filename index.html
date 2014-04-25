@@ -1,0 +1,65 @@
+<html ng-app="myApp">  
+    <head lang="en">
+        <meta charset="utf-8">
+        <title>My angular playground</title>  
+        <link rel="stylesheet" type="text/css" href="reset.css" />
+        <link rel="stylesheet" type="text/css" href="http://angular-ui.github.com/ng-grid/css/ng-grid.css" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+        <script type="text/javascript" src="main.js"></script>
+    </head>
+    <body>
+
+        <div ng-controller="MyCtrl">
+        <div class="data-source" >  Набор данных:
+              <label><input type="radio" ng-model="dataSize" value="small">  Маленкий</label>
+              <label><input type="radio" ng-model="dataSize" value="big"> Большой </label>
+              <label><input type="radio" ng-model="dataSize" value="custom"> Свой </label>
+        </div>
+        <input type="search" ng-model="q" placeholder="Поиск..." />
+        <table class="grid">
+                    <tr>
+                        <th class="grid-header" ng-click="sortField = 'id'; reverse=!reverse">
+                            Идентификатор
+                        </th>
+                        <th class="grid-header-name" ng-click="sortField = 'name'; reverse=!reverse">
+                            Название
+                        </th>
+                        <th class="grid-header" ng-click="sortField = 'price'; reverse=!reverse">
+                            Стоимость
+                        </th>
+                        <th class="grid-header" ng-click="sortField = 'bid'; reverse=!reverse">
+                            Ставка
+                        </th>
+                    </tr>
+                    <tr class="grid-row" ng-repeat="row in data | offset: currentPage*pageSize | limitTo:pageSize | orderBy:sortField:reverse | filter:q" ng-click="selectRow(row, $event)">
+                        <td class="grid-cell">
+                            {{ row.id }}
+                        </td>
+                        <td class="grid-cell">
+                            {{ row.name }}
+                        </td>
+                        <td class="grid-cell">
+                            {{ row.price }}
+                        </td>
+                        <td class="grid-cell">
+                            {{ row.bid }}
+                        </td>
+                    </tr>
+                </table>
+
+            <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+                Previous
+            </button>
+            {{currentPage+1}}/{{numberOfPages()}}
+            <button ng-disabled="currentPage >= data.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+                Next
+            </button>
+
+        <div class="selectedItem">Выбрано: {{selectedItem}}</div>
+        </div>
+
+        <button ng-click="addGrid()">Добавить еще грид</button>
+    </body>
+</html>
