@@ -1,37 +1,46 @@
-        <div class="data-source" >  Набор данных:
-              <label><input type="radio" ng-model="dataSize" value="small">  Маленкий</label>
-              <label><input type="radio" ng-model="dataSize" value="big"> Большой </label>
-              <label><input type="radio" ng-model="dataSize" value="custom"> Свой </label>
+ <div class="data-source" >  Набор данных:
+              <label><input type="radio" ng-model="dataSize" value="small" name="dataSize">  Маленкий</label>
+              <label><input type="radio" ng-model="dataSize" value="large" name="dataSize"> Большой </label>
+              <label><input type="radio" ng-model="dataSize" value="small" name="dataSize"> Свой </label>
         </div>
+        <input type="search" ng-model="q" placeholder="Поиск..." />
         <table class="grid">
                     <tr>
-                        <th ng-click="sortBy('id')">
+                        <th class="grid-header" ng-click="sortField = 'id'; reverse=!reverse">
                             Идентификатор
                         </th>
-                        <th ng-click="sortBy('name')">
+                        <th class="grid-header-name" ng-click="sortField = 'name'; reverse=!reverse">
                             Название
                         </th>
-                        <th ng-click="sortBy('price')">
+                        <th class="grid-header" ng-click="sortField = 'price'; reverse=!reverse">
                             Стоимость
                         </th>
-                        <th ng-click="sortBy('bid')">
+                        <th class="grid-header" ng-click="sortField = 'bid'; reverse=!reverse">
                             Ставка
                         </th>
                     </tr>
-                    <tr ng-repeat="row in data">
-                        <td>
+                    <tr class="grid-row" ng-repeat="row in data | offset: currentPage*pageSize | limitTo:pageSize | orderBy:sortField:reverse | filter:q" ng-click="selectRow(row, $event)">
+                        <td class="grid-cell">
                             {{ row.id }}
                         </td>
-                        <td>
+                        <td class="grid-cell">
                             {{ row.name }}
                         </td>
-                        <td>
+                        <td class="grid-cell">
                             {{ row.price }}
                         </td>
-                        <td>
+                        <td class="grid-cell">
                             {{ row.bid }}
                         </td>
                     </tr>
                 </table>
+
+            <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+                Previous
+            </button>
+            {{currentPage+1}}/{{numberOfPages()}}
+            <button ng-disabled="currentPage >= data.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+                Next
+            </button>
 
         <div class="selectedItem">Выбрано: {{selectedItem}}</div>
