@@ -60,6 +60,9 @@ app.directive('grid', function() {
             var data = [];
             var row;
 
+            $scope.gridFields = [];
+            $scope.gridFieldsNames = [];
+
             rawData[0].map(function(field) {
                 $scope.gridFields.push(field.field);
                 $scope.gridFieldsNames.push(field.title);
